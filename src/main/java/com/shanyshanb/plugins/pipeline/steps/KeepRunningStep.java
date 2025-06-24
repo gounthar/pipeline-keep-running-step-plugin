@@ -27,15 +27,13 @@ import com.google.common.collect.ImmutableSet;
 import hudson.Extension;
 import hudson.FilePath;
 import hudson.model.TaskListener;
-import net.sf.json.JSON;
+import java.util.Set;
+import javax.annotation.Nonnull;
 import org.jenkinsci.plugins.workflow.steps.Step;
 import org.jenkinsci.plugins.workflow.steps.StepContext;
 import org.jenkinsci.plugins.workflow.steps.StepDescriptor;
 import org.jenkinsci.plugins.workflow.steps.StepExecution;
 import org.kohsuke.stapler.DataBoundConstructor;
-
-import javax.annotation.Nonnull;
-import java.util.Set;
 
 /**
  * Keep the process running even if the build has finished.
@@ -44,11 +42,8 @@ import java.util.Set;
  */
 public class KeepRunningStep extends Step {
 
-
     @DataBoundConstructor
-    public KeepRunningStep() {
-
-    }
+    public KeepRunningStep() {}
 
     @Override
     public StepExecution start(StepContext context) {
@@ -57,8 +52,7 @@ public class KeepRunningStep extends Step {
 
     @Extension
     public static class DescriptorImpl extends StepDescriptor {
-        public DescriptorImpl() {
-        }
+        public DescriptorImpl() {}
 
         @Override
         public Set<? extends Class<?>> getRequiredContext() {
@@ -81,5 +75,4 @@ public class KeepRunningStep extends Step {
             return Messages.KeepRunningStep_DescriptorImpl_displayName();
         }
     }
-
 }

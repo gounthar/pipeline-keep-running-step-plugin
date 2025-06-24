@@ -24,11 +24,10 @@
 
 package com.shanyshanb.plugins.pipeline.steps;
 
-import org.jenkinsci.plugins.workflow.steps.*;
-
-import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
+import javax.annotation.Nonnull;
+import org.jenkinsci.plugins.workflow.steps.*;
 
 /**
  * Execution of {@link KeepRunningStep}.
@@ -46,12 +45,15 @@ public class KeepRunningStepExecution extends AbstractStepExecutionImpl {
     public boolean start() throws Exception {
         Map<String, String> keepRunning = new HashMap<>();
         keepRunning.put("JENKINS_NODE_COOKIE", "keepRunning");
-        getContext().newBodyInvoker().
-                withContext(EnvironmentExpander.merge(getContext().get(EnvironmentExpander.class), EnvironmentExpander.constant(keepRunning))).
-                withCallback(BodyExecutionCallback.wrap(getContext())).
-                start();
+        getContext()
+                .newBodyInvoker()
+                .withContext(EnvironmentExpander.merge(
+                        getContext().get(EnvironmentExpander.class), EnvironmentExpander.constant(keepRunning)))
+                .withCallback(BodyExecutionCallback.wrap(getContext()))
+                .start();
         return false;
     }
 
-    @Override public void onResume() {}
+    @Override
+    public void onResume() {}
 }
